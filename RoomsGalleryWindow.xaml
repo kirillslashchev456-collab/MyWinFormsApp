@@ -1,0 +1,103 @@
+﻿<Window x:Class="WpfApp1.RoomsGalleryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="RoomsGalleryWindow" Height="900" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#1E0A2A">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#3A1A5A" Padding="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Галерея комнат" 
+                           FontSize="36" 
+                           FontWeight="Bold" 
+                           Foreground="White"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Exit Button -->
+        <Button Grid.Row="0" 
+                Content="Назад" 
+                HorizontalAlignment="Left" 
+                Margin="20,20,0,20" 
+                Padding="20,10"
+                Background="#6A0DAD" 
+                Foreground="White"
+                BorderBrush="#8E44AD"
+                FontWeight="Bold"
+                FontSize="18"
+                Click="BackButton_Click" Width="120">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="2"
+                                        CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#8E44AD"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <!-- Rooms List -->
+        <ScrollViewer Grid.Row="1" Padding="20">
+            <ItemsControl x:Name="RoomsGallery">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="20" 
+                                Padding="20" 
+                                BorderBrush="#6A0DAD" 
+                                BorderThickness="2"
+                                Background="#2D0D42"
+                                CornerRadius="8">
+                            <StackPanel>
+                                <Image Source="{Binding ImagePath}" 
+                                       Height="400" 
+                                       Width="700" 
+                                       Stretch="UniformToFill"/>
+                                <TextBlock Text="{Binding RoomNumber}" 
+                                           FontSize="24" 
+                                           FontWeight="Bold" 
+                                           Margin="0,10"
+                                           Foreground="#D0A3FF"/>
+                                <TextBlock Text="{Binding Description}" 
+                                           FontSize="20" 
+                                           TextWrapping="Wrap"
+                                           Foreground="White"/>
+                                <TextBlock Text="{Binding Capacity}" 
+                                           FontSize="18" 
+                                           Margin="0,10"
+                                           Foreground="#B388FF"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

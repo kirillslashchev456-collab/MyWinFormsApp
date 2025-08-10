@@ -1,0 +1,96 @@
+﻿<Window x:Class="WpfApp1.AboutUs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="О нашем клубе" Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent">
+
+    <Grid>
+        <!-- Фоновое изображение -->
+        <Image Source="Assets/fioletov.jpg" Stretch="UniformToFill" />
+
+        <!-- Затемнение фона -->
+        <Rectangle Fill="#2E2E2E" Opacity="0.7" />
+
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="О нашем компьютерном клубе" 
+                       FontSize="36" FontWeight="Bold" 
+                       Foreground="#FFFFFF" Margin="0,0,0,30" 
+                       HorizontalAlignment="Center"
+                       TextDecorations="Underline"/>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="Добро пожаловать в наш компьютерный клуб KIBERS LOUNGE PRO!" 
+                               FontSize="24" Foreground="#EDEDED" TextWrapping="Wrap" Margin="0,0,0,20"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Мы предлагаем вам комфортное и увлекательное времяпрепровождение с современным оборудованием и лучшими условиями." 
+                               FontSize="22" Foreground="#EDEDED" TextWrapping="Wrap" Margin="0,0,0,30"/>
+
+                    <!-- Комнаты -->
+                    <TextBlock Text="Наши комнаты:" FontSize="28" FontWeight="Bold" Foreground="#FFD700" Margin="0,10,0,15"/>
+                    <StackPanel Margin="30,0,0,20">
+                        <TextBlock Text="• Малая комната: Вместимость 5 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Средняя комната: Вместимость 10 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Большая комната: Вместимость 15 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• VIP-комната: Вместимость 20 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Комната с Playstation: Вместимость 8 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Комната с Xbox: Вместимость 12 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Комната с VR: Вместимость 6 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• VIP-комната для двоих: Вместимость 4 человека" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Зал для киберспорта: Вместимость 25 человек" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Комната с проектором: Вместимость 7 человек" FontSize="22" Foreground="#FFFFFF"/>
+                    </StackPanel>
+
+                    <!-- Тарифы -->
+                    <TextBlock Text="Наши тарифы:" FontSize="28" FontWeight="Bold" Foreground="#FFD700" Margin="0,10,0,15"/>
+                    <StackPanel Margin="30,0,0,20">
+                        <TextBlock Text="• Стандартный: 150₽/час (Обычный тариф)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• VIP: 300₽/час (Повышенный комфорт)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Геймерский: 200₽/час (Мощные компьютеры)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Студенческий: 100₽/час (Скидка для студентов)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Дневной: 120₽/час (Скидка в дневное время)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Ночной: 80₽/час (Скидка в ночное время)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Премиум: 350₽/час (Максимальный комфорт)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Бронзовый: 90₽/час (Базовый тариф)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Серебряный: 170₽/час (Улучшенный тариф)" FontSize="22" Foreground="#FFFFFF"/>
+                        <TextBlock Text="• Золотой: 250₽/час (Премиальный тариф)" FontSize="22" Foreground="#FFFFFF"/>
+                    </StackPanel>
+
+                    <!-- Контакты -->
+                    <TextBlock Text="Как нас найти:" FontSize="28" FontWeight="Bold" Foreground="#FFD700" Margin="0,20,0,15"/>
+                    <TextBlock Text="Мы находимся по адресу: ул. Примерная, д. 1, г. Примерск." 
+                               FontSize="22" Foreground="#EDEDED" TextWrapping="Wrap" Margin="30,0,0,10"/>
+                    <TextBlock Text="Телефон: +7 (XXX) XXX-XX-XX" 
+                               FontSize="22" Foreground="#EDEDED" Margin="30,0,0,10"/>
+                    <TextBlock Text="Часы работы: круглосуточно, без выходных" 
+                               FontSize="22" Foreground="#EDEDED" Margin="30,0,0,20"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Кнопка Назад -->
+            <Button Content="Назад" Grid.Row="2" 
+                    Width="150" Height="40" 
+                    HorizontalAlignment="Right" 
+                    Background="#6A4A93" Foreground="White"
+                    FontSize="18" FontWeight="Bold"
+                    BorderBrush="#8E44AD" BorderThickness="1"
+                    Click="BackButton_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="2" Color="#40000000"/>
+                </Button.Effect>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

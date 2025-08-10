@@ -1,0 +1,63 @@
+﻿<Window x:Class="WpfApp1.RoomEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" Height="400" Width="500"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#28193D" 
+        AllowsTransparency="True">
+
+    <Border Background="#382953" CornerRadius="10" BorderBrush="#503A7A" BorderThickness="2">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding WindowTitle}" 
+                       Grid.Row="0"
+                       FontSize="22" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Номер:" Grid.Row="0" Grid.Column="0" Margin="0,0,10,10" Foreground="#D6BCFA"/>
+                <TextBox x:Name="txtNumber" Grid.Row="0" Grid.Column="1" Margin="0,0,0,10"
+                         Text="{Binding RoomNumber}" Background="#433369" Foreground="White" BorderBrush="#6A5ACD"/>
+
+                <TextBlock Text="Вместимость:" Grid.Row="1" Grid.Column="0" Margin="0,0,10,10" Foreground="#D6BCFA"/>
+                <TextBox x:Name="txtCapacity" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"
+                         Text="{Binding Capacity}" Background="#433369" Foreground="White" BorderBrush="#6A5ACD"/>
+
+                <TextBlock Text="Описание:" Grid.Row="2" Grid.Column="0" Margin="0,0,10,10" Foreground="#D6BCFA"/>
+                <TextBox x:Name="txtDescription" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"
+                         Text="{Binding Description}" Height="100" TextWrapping="Wrap"
+                         AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Background="#433369" Foreground="White" BorderBrush="#6A5ACD"/>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Сохранить" Width="120" Height="40" Margin="0,0,10,0" Click="BtnSave_Click"
+                        Background="#6A0DAD" Foreground="White" BorderBrush="#8E44AD"/>
+                <Button Content="Отмена" Width="120" Height="40" Click="BtnCancel_Click"
+                        Background="#6A0DAD" Foreground="White" BorderBrush="#8E44AD"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

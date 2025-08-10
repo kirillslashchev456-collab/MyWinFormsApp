@@ -1,0 +1,338 @@
+﻿<Window x:Class="WpfApp1.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Администратор" Height="800" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Window.Resources>
+        <!-- Цветовая палитра -->
+        <SolidColorBrush x:Key="DeepPurple" Color="#1A0036"/>
+        <SolidColorBrush x:Key="MediumPurple" Color="#2D0D42"/>
+        <SolidColorBrush x:Key="LightPurple" Color="#3A1A5A"/>
+        <SolidColorBrush x:Key="AccentPurple" Color="#6A0DAD"/>
+        <SolidColorBrush x:Key="HighlightPurple" Color="#8E44AD"/>
+        <SolidColorBrush x:Key="TextColor" Color="#E0D6ED"/>
+        <SolidColorBrush x:Key="DisabledText" Color="#7A6B8A"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#4A148C"/>
+        <SolidColorBrush x:Key="SelectionColor" Color="#512DA8"/>
+
+        <!-- Стиль кнопок навигации -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="20,15"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource LightPurple}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{StaticResource DisabledText}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль кнопок действий -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentPurple}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource HighlightPurple}"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.5" Color="#8E44AD"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource MediumPurple}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DisabledText}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="{StaticResource MediumPurple}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="{StaticResource MediumPurple}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource LightPurple}"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="RowHeight" Value="40"/>
+        </Style>
+
+        <!-- Стиль ячеек DataGrid -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource SelectionColor}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль заголовков столбцов DataGrid -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="{StaticResource LightPurple}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
+
+        <!-- Стиль текстовых блоков -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <!-- Стиль текстовых полей -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource MediumPurple}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource DeepPurple}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель - навигация -->
+        <Border Grid.Column="0" Background="{StaticResource MediumPurple}" CornerRadius="0,0,20,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Заголовок -->
+                <StackPanel Grid.Row="0" Margin="20,20,20,10">
+                    <TextBlock Text="Администратор" 
+                               FontSize="24" 
+                               FontWeight="Bold" 
+                               Foreground="{StaticResource TextColor}"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="K I B E R S  L O U N G E  P R O" 
+                               FontSize="18" 
+                               Foreground="{StaticResource TextColor}"
+                               HorizontalAlignment="Center"
+                               Margin="0,5,0,0"/>
+                </StackPanel>
+
+                <!-- Кнопки навигации -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="10,0,10,0">
+                    <StackPanel>
+                        <Button x:Name="btnOrders" Content="Заказы" Click="BtnOrders_Click"
+                                Style="{StaticResource NavButtonStyle}"/>
+                        <Button x:Name="btnTariffs" Content="Тарифы" Click="BtnTariffs_Click"
+                                Style="{StaticResource NavButtonStyle}"/>
+                        <Button x:Name="btnRooms" Content="Комнаты" Click="BtnRooms_Click"
+                                Style="{StaticResource NavButtonStyle}"/>
+                        <Button x:Name="btnServices" Content="Доп. услуги" Click="BtnServices_Click"
+                                Style="{StaticResource NavButtonStyle}"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Кнопка выхода -->
+                <Button Grid.Row="3" Content="Выход" Click="BtnExit_Click" 
+                        Margin="20,0,20,20"
+                        Background="Transparent" 
+                        Foreground="{StaticResource TextColor}"
+                        BorderBrush="{StaticResource BorderColor}"
+                        BorderThickness="1"
+                        FontSize="18"
+                        Padding="20,10"
+                        HorizontalAlignment="Stretch"/>
+            </Grid>
+        </Border>
+
+        <!-- Правая панель - контент -->
+        <Grid Grid.Column="1" Margin="15">
+            <!-- Панель заказов -->
+            <StackPanel x:Name="pnlOrders" Visibility="Visible">
+                <TextBlock Text="Заказы" FontSize="22" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <!-- Sorting and Filtering Controls -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Сортировка:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <Button Content="По цене" Click="BtnSortByPrice_Click" Margin="5,0"/>
+                    <Button Content="По дате" Click="BtnSortByDate_Click" Margin="5,0"/>
+                    <Button Content="По тарифу" Click="BtnSortByTariff_Click" Margin="5,0"/>
+                    <Button Content="По имени" Click="BtnSortByName_Click" Margin="5,0"/>
+                    <Button Content="По фамилии" Click="BtnSortByLastName_Click" Margin="5,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBox x:Name="txtNameFilter" Width="200" Margin="0,0,10,0" 
+                             ToolTip="Введите имя или фамилию для фильтрации"/>
+                    <Button Content="Фильтр" Click="BtnFilterByName_Click" Margin="5,0"/>
+                    <Button Content="Сброс" Click="BtnClearFilter_Click" Margin="5,0"/>
+                </StackPanel>
+
+                <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <DataGrid x:Name="dgOrders" AutoGenerateColumns="False" Height="500">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding ID_Записи}" Width="60"/>
+                                <DataGridTextColumn Header="Тариф" Binding="{Binding Название_Тарифа}" Width="180"/>
+                                <DataGridTextColumn Header="Комната" Binding="{Binding Номер_Комнаты}" Width="100"/>
+                                <DataGridTextColumn Header="Дата" Binding="{Binding Дата, StringFormat=\{0:d\}}" Width="120"/>
+                                <DataGridTextColumn Header="Время" Binding="{Binding Время_начала}" Width="100"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Имя_Клиента}" Width="150"/>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия_Клиента}" Width="150"/>
+                                <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}" Width="120"/>
+                                <DataGridTextColumn Header="Оплачено" Binding="{Binding Оплачено}" Width="100"/>
+                                <DataGridTextColumn Header="ДопУслуги" Binding="{Binding ДопУслуги}" Width="250"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Добавить" Click="BtnAddOrder_Click"/>
+                    <Button Content="Изменить" Click="BtnEditOrder_Click" Margin="10,0"/>
+                    <Button Content="Удалить" Click="BtnDeleteOrder_Click"/>
+                    <Button Content="Сохранить" Click="BtnSaveOrder_Click" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Панель тарифов -->
+            <StackPanel x:Name="pnlTariffs" Visibility="Collapsed">
+                <TextBlock Text="Тарифы" FontSize="22" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10">
+                    <DataGrid x:Name="dgTariffs" AutoGenerateColumns="False" 
+                              SelectionChanged="DgTariffs_SelectionChanged" Height="500">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ID_Тарифа}" Width="50"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Название_Тарифа}" Width="150"/>
+                            <DataGridTextColumn Header="Цена за час" Binding="{Binding Цена_за_час, StringFormat={}{0} руб.}" Width="120"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Описание}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Добавить" Click="BtnAddTariff_Click"/>
+                    <Button Content="Изменить" Click="BtnEditTariff_Click" Margin="10,0"/>
+                    <Button Content="Удалить" Click="BtnDeleteTariff_Click"/>
+                    <Button Content="Сохранить" Click="BtnSaveTariff_Click" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Панель комнат -->
+            <StackPanel x:Name="pnlRooms" Visibility="Collapsed">
+                <TextBlock Text="Комнаты" FontSize="22" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10">
+                    <DataGrid x:Name="dgRooms" AutoGenerateColumns="False" 
+                              SelectionChanged="DgRooms_SelectionChanged" Height="500">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ID_Комнаты}" Width="50"/>
+                            <DataGridTextColumn Header="Номер" Binding="{Binding Номер_Комнаты}" Width="80"/>
+                            <DataGridTextColumn Header="Вместимость" Binding="{Binding Вместимость}" Width="100"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Описание}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Добавить" Click="BtnAddRoom_Click"/>
+                    <Button Content="Изменить" Click="BtnEditRoom_Click" Margin="10,0"/>
+                    <Button Content="Удалить" Click="BtnDeleteRoom_Click"/>
+                    <Button Content="Сохранить" Click="BtnSaveRoom_Click" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Панель доп. услуг -->
+            <StackPanel x:Name="pnlServices" Visibility="Collapsed">
+                <TextBlock Text="Дополнительные услуги" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10">
+                    <DataGrid x:Name="dgServices" AutoGenerateColumns="False" 
+                              SelectionChanged="DgServices_SelectionChanged" Height="500">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ID_ДопУслуги}" Width="50"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Название_Услуги}" Width="200"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Цена, StringFormat={}{0} руб.}" Width="120"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Описание}" Width="*"/>
+                          
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                    <Button Content="Добавить" Click="BtnAddService_Click"/>
+                    <Button Content="Изменить" Click="BtnEditService_Click" Margin="10,0"/>
+                    <Button Content="Удалить" Click="BtnDeleteService_Click"/>
+                    <Button Content="Сохранить" Click="BtnSaveService_Click" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
